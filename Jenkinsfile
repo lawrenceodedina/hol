@@ -5,11 +5,6 @@ pipeline {
     }
 
     stages {
-        stage('Hello') {
-            steps {
-                echo 'Hello World'
-            }
-        }
         stage('build') {
             steps {
                 echo 'Hello build'
@@ -18,12 +13,12 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('deploy') {
+        stage('testy') {
             steps {
-                echo 'Hello deploy'
+                sh 'mvn test'
             }
         }
-        stage('Test') {
+        stage('deploy') {
             steps {
                 echo 'Hello Test'
             }
