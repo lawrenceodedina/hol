@@ -13,15 +13,21 @@ pipeline {
                 sh 'mvn package'
             }
         }
-        stage('testy') {
+        stage('test') {
             steps {
                 sh 'mvn test'
             }
         }
-        stage('deploy') {
-            steps {
-                echo 'Hello Test'
-            }
-        }
+        stage ('build and publish image') {
+      steps {
+        script {
+          checkout scm
+          docker.withRegistry('', 'DockerID') {
+          def customImage = docker.build("femiodedina/femi-pipeline:${env.BUILD_ID}")
+          def customImage1 = docker.build("femiodedina/femi-pipeline")
+          customImage.push()
+          customImage1.push()
+          }
+    }
     }
 }
