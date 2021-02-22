@@ -26,7 +26,7 @@ pipeline {
           checkout scm
           docker.withRegistry('', 'DockerID') {
           def customImage = docker.build("lawrenceodedina/femi-pipeline:${env.BUILD_ID}")
-          def customImage1 = docker.build("lawrenceodedina/femi-pipeline
+          def customImage1 = docker.build("lawrenceodedina/femi-pipeline")
           customImage.push()
           customImage1.push()
           }
